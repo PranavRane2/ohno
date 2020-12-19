@@ -1,6 +1,16 @@
 <?xml version='1.0'?>
-<robot name="lols">
+<robot name="lols" xmlns:xacro="http://www.ros.org/wiki/xacro">
 
+  <xacro:property name="wheel_radius" value="0.2"/>
+  <xacro:property name="wheel_thickness" value="0.1" />
+  <xacro:property name="wheel_mass" value="0.2" />
+  <xacro:property name="chassis_length" value="1" />
+  <xacro:property name="chassis_breadth" value="0.5" />
+  <xacro:property name="chassis_height" value="0.25" />
+  <xacro:property name="chassis_mass" value="5" />
+
+  <xacro:include filename="$(find ohno)/urdf/materials.xacro"/>
+  
   <gazebo>
     <static>False</static>
   </gazebo>
@@ -9,29 +19,35 @@
 
   <!-- Base Link -->
   <link name="base_link">
+    <pose>0 0 3 0 0 0</pose>
+
     <visual>
-      <material name="blue"> 
-        <color rgba="0 0.5 1 1"/>
-      </material>
+      <material name="white"/>
       <origin xyz="0 0 0.05" rpy="0 0 0" />
       <geometry>
-          <box size="1 0.5 0.25"/>
+          <box size="${chassis_length} ${chassis_breadth} ${chassis_height}"/>
       </geometry>
     </visual>
     <!-- Base collision, mass and inertia -->
+    
     <collision>
       <origin xyz="0 0 0.05" rpy="0 0 0" />
       <geometry>
-          <box size="1 0.5 0.25"/>
+          <box size="${chassis_length} ${chassis_breadth} ${chassis_height}"/>
       </geometry>
     </collision>
+    
     <inertial>
-      <mass value="5"/>
+      <mass value="${chassis_mass}"/>
       <inertia ixx="0.13" ixy="0.0" ixz="0.0" iyy="0.21" iyz="0.0" izz="0.13"/>
     </inertial>
-    </link>
+  </link>
 
-    <link name="right_front">
+  <gazebo reference="base_link">
+    <material>Gazebo/Blue</material>
+  </gazebo>
+
+  <link name="right_front">
         <inertial>
             <!-- <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/> -->
             <mass value="0.5"/>
@@ -39,18 +55,16 @@
         </inertial>
         <visual>
             <origin xyz="0.0 0.0 0.0" rpy="1.570795 0.0 0.0"/>
-            <material name="black">
-                <color rgba="0.05 0.05 0.05 1"/>
-            </material>
+            <material name="black"/>
             <geometry>
-                <cylinder length="0.1" radius="0.2"/>
+                <cylinder length="${wheel_thickness}" radius="${wheel_radius}"/>
             </geometry>
         </visual>
 
         <collision>
             <origin xyz="0.0 0.0 0.0" rpy="1.570795 0.0 0.0"/>
             <geometry>
-                <cylinder length="0.1" radius="0.2" />
+                <cylinder length="${wheel_thickness}" radius="${wheel_radius}" />
             </geometry>
         </collision>
     </link>
@@ -78,14 +92,14 @@
                 <color rgba="0.05 0.05 0.05 1"/>
             </material>
             <geometry>
-                <cylinder length="0.1" radius="0.2"/>
+                <cylinder length="${wheel_thickness}" radius="${wheel_radius}"/>
             </geometry>
         </visual>
 
         <collision>
             <origin xyz="0.0 0.0 0.0" rpy="1.570795 0.0 0.0"/>
             <geometry>
-                <cylinder length="0.1" radius="0.2" />
+                <cylinder length="${wheel_thickness}" radius="${wheel_radius}" />
             </geometry>
         </collision>
     </link>
@@ -113,14 +127,14 @@
                 <color rgba="0.05 0.05 0.05 1"/>
             </material>
             <geometry>
-                <cylinder length="0.1" radius="0.2"/>
+                <cylinder length="${wheel_thickness}" radius="${wheel_radius}"/>
             </geometry>
         </visual>
 
         <collision>
             <origin xyz="0.0 0.0 0.0" rpy="1.570795 0.0 0.0"/>
             <geometry>
-                <cylinder length="0.1" radius="0.2" />
+                <cylinder length="${wheel_thickness}" radius="${wheel_radius}" />
             </geometry>
         </collision>
     </link>
@@ -148,14 +162,14 @@
                 <color rgba="0.05 0.05 0.05 1"/>
             </material>
             <geometry>
-                <cylinder length="0.1" radius="0.2"/>
+                <cylinder length="${wheel_thickness}" radius="${wheel_radius}"/>
             </geometry>
         </visual>
 
         <collision>
             <origin xyz="0.0 0.0 0.0" rpy="1.570795 0.0 0.0"/>
             <geometry>
-                <cylinder length="0.1" radiu0s="0.2" />
+                <cylinder length="${wheel_thickness}" radius="${wheel_radius}" />
             </geometry>
         </collision>
     </link>
@@ -170,11 +184,6 @@
         <child link="left_back"/>
         <axis xyz="0 1 0"/>
     </joint>
-
-  <gazebo reference="base_link">
-    <material>Gazebo/Blue</material>
-    <pose>0 0 3 0 0 0</pose>
-  </gazebo>
 
   <joint name="dummy_joint" type="fixed">
     <origin xyz="0.0 0.0 1" rpy="0.0 0.0 0.0"/>
