@@ -1,0 +1,21 @@
+ 
+<?xml version="1.0"?>
+<robot name="lols" xmlns:xacro="http://www.ros.org/wiki?xacro">
+  <gazebo reference="base_link">
+    <material>Gazebo/White</material>
+  </gazebo>
+  <gazebo reference="front_right">
+    <material>Gazebo/Black</material>
+  </gazebo>
+  <gazebo reference="front_left">
+    <material>Gazebo/Black</material>
+  </gazebo>
+<gazebo reference="back_right">
+    <material>Gazebo/Black</material>
+  </gazebo>
+
+  <gazebo reference="back_left">
+    <material>Gazebo/Black</material>
+  </gazebo>
+   
+</robot>

@@ -11,7 +11,7 @@
 
   <xacro:include filename="$(find ohno)/urdf/materials.xacro"/>
   <xacro:include filename="$(find ohno)/urdf/wheel.xacro"/>
-
+  <!-- <xacro:include filename="$(find ohno)/urdf/robo.gazebo"/> -->
   
   <gazebo>
     <static>False</static>
@@ -32,7 +32,7 @@
     </visual>
     <!-- Base collision, mass and inertia -->
     
-    <collision>
+    <collision>z
       <origin xyz="0 0 0.05" rpy="0 0 0" />
       <geometry>
           <box size="${chassis_length} ${chassis_breadth} ${chassis_height}"/>
@@ -45,14 +45,27 @@
     </inertial>
   </link>
 
-  <gazebo reference="base_link">
-    <material>Gazebo/White</material>
-  </gazebo>
-
   <xacro:define_wheel name_a="front_right" name_b="front_right_joint"  rad="${wheel_radius}" thicc="${wheel_thickness}"  origin_xyz="0.4 -0.3 0.05"/>
   <xacro:define_wheel name_a="front_left" name_b="front_left_joint" rad="${wheel_radius}" thicc="${wheel_thickness}" origin_xyz="0.4 0.3 0.05"/>
   <xacro:define_wheel name_a="back_right" name_b="back_right_joint" rad="${wheel_radius}" thicc="${wheel_thickness}" origin_xyz="-0.4 -0.3 0.05"/>
   <xacro:define_wheel name_a="back_left" name_b="back_left_joint" rad="${wheel_radius}" thicc="${wheel_thickness}" origin_xyz="-0.4 0.3 0.05"/>
+
+  <gazebo reference="base_link">
+    <material>Gazebo/White</material>
+  </gazebo>
+  <gazebo reference="front_right">
+    <material>Gazebo/Black</material>
+  </gazebo>
+  <gazebo reference="front_left">
+    <material>Gazebo/Black</material>
+  </gazebo>
+<gazebo reference="back_right">
+    <material>Gazebo/Black</material>
+  </gazebo>
+
+  <gazebo reference="back_left">
+    <material>Gazebo/Black</material>
+  </gazebo>
   
   <joint name="dummy_joint" type="fixed">
     <origin xyz="0.0 0.0 1" rpy="0.0 0.0 0.0"/>
