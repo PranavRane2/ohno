@@ -95,6 +95,7 @@
     </gazebo>
 
     <joint name="joint_left_front" type="continuous">
+    <!-- chassis_length/2-0.1*(chassis_length)-->
         <origin xyz="0.4 0.3 0.05" rpy="0.0 0.0 0.0"/>
         <parent link="base_link"/>
         <child link="left_front"/>
