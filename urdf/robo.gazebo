@@ -4,35 +4,35 @@
         <static>False</static>
     </gazebo>
     <gazebo reference="base_link">
-        <material>Gazebo/White</material>
+        <material>Gazebo/CloudySky</material>
     </gazebo>
     <gazebo reference="front_right">
-        <material>Gazebo/Black</material>
+        <material>Gazebo/RedGlow</material>
     </gazebo>
     <gazebo reference="front_left">
-        <material>Gazebo/Black</material>
+        <material>Gazebo/RedGlow</material>
     </gazebo>
     <gazebo reference="back_right">
-        <material>Gazebo/Black</material>
+        <material>Gazebo/YellowGlow </material>
     </gazebo>
     <gazebo reference="back_left">
-        <material>Gazebo/Black</material>
+        <material>Gazebo/YellowGlow </material>
     </gazebo>
-    <gazebo>
-        <plugin filename="libgazebo_ros_robot_drive.so" name="4_wheeled_robot_controller">
-            <legacyMode>false</legacyMode>
-            <alwaysOn>true</alwaysOn>
-            <updateRate>20</updateRate>
-            <leftJoint>front_left_joint</leftJoint>
-            <rightJoint>front_right_joint</rightJoint>
-            <wheelSeparation>0.3</wheelSeparation>
-            <wheelDiameter>0.2</wheelDiameter>
-            <torque>0.1</torque>
-            <commandTopic>cmd_vel</commandTopic>
-            <odometryTopic>odom</odometryTopic>
-            <odometryFrame>odom</odometryFrame>
-            <robotBaseFrame>link_chassis</robotBaseFrame>
-        </plugin>
-    </gazebo>
+  <gazebo>
+    <plugin name="skid_steer_drive_controller" filename="libgazebo_ros_skid_steer_drive.so">
+      <updateRate>100.0</updateRate>
+      <robotNamespace>/</robotNamespace>
+      <leftFrontJoint>front_left_joint</leftFrontJoint>
+      <rightFrontJoint>front_right_joint</rightFrontJoint>
+      <leftRearJoint>back_left_joint</leftRearJoint>
+      <rightRearJoint>back_right_joint</rightRearJoint>
+      <wheelSeparation>${chassis_breadth}</wheelSeparation>
+      <wheelDiameter>${wheel_radius*2}</wheelDiameter>
+      <robotBaseFrame>base_link</robotBaseFrame>
+      <torque>20</torque>
+      <topicName>cmd_vel</topicName>
+      <broadcastTF>false</broadcastTF>
+    </plugin>
+  </gazebo>
 
 </robot>
